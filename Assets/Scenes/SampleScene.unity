@@ -214,6 +214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 632806911}
   - component: {fileID: 632806910}
+  - component: {fileID: 632806912}
   m_Layer: 0
   m_Name: space_Background
   m_TagString: Untagged
@@ -266,7 +267,7 @@ SpriteRenderer:
   m_FlipY: 0
   m_DrawMode: 2
   m_Size: {x: 42.16, y: 20.55}
-  m_AdaptiveModeThreshold: 0.576
+  m_AdaptiveModeThreshold: 0
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
@@ -285,7 +286,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1497144017
+--- !u!114 &632806912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632806909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff32f306287512e4bbd050ed42ed0953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+--- !u!1 &1915632914
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -293,40 +307,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1497144019}
-  - component: {fileID: 1497144018}
+  - component: {fileID: 1915632916}
+  - component: {fileID: 1915632915}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: GameLogic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1497144018
+--- !u!114 &1915632915
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1497144017}
+  m_GameObject: {fileID: 1915632914}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62fdf182a91028b4295200a867f11533, type: 3}
+  m_Script: {fileID: 11500000, guid: 07687f1db0dc4e547b970727c50bd6c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 7449278430301526035, guid: b7a06eb52733b7c4da78d7388168c002,
+  projectiles: []
+  spawner: {fileID: 4588126005907372045, guid: 58867690475c48442b738d17d1ea7e3f, type: 3}
+  radiusSpawner: {fileID: 1942093577277841305, guid: 9beda41e2910fdd4faaa62ceec64ffbe,
     type: 3}
-  totalProjectiles: 10
-  delayBetweenProjectiles: 0.3
---- !u!4 &1497144019
+  lineBeamProjectile: {fileID: 4613968047351465823, guid: 3983ff6793824e74c90adcc5ff229577,
+    type: 3}
+  sinusoidalProjectile: {fileID: 7449278430301526035, guid: b7a06eb52733b7c4da78d7388168c002,
+    type: 3}
+  shurikenProjectile: {fileID: 884149912059181575, guid: 738a7991d83ff984abcd073be67e3bc2,
+    type: 3}
+  greenProjectile: {fileID: 4541764561575224166, guid: df37f66b56c6f0a4894329088c2cae1d,
+    type: 3}
+  spawningTime: 1
+  difficulty: 1
+--- !u!4 &1915632916
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1497144017}
+  m_GameObject: {fileID: 1915632914}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.95, y: 0, z: 0}
+  m_LocalPosition: {x: 64.56354, y: -0.37829053, z: -3.0253906}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

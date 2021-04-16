@@ -1,16 +1,13 @@
 fileFormatVersion: 2
-guid: 0c53ac61b25ac7b48936f3bbbdfcff13
+guid: 23b3594c1075cb04994f86c4e3b31483
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7537587569554925209
-    second: Basic Bullet_0
+      213: -6756608404314287721
+    second: Bullet_2_0
   - first:
-      213: -2832321436954888515
-    second: Basic Bullet_1
-  - first:
-      213: 3028187350809015268
-    second: Basic Bullet_2
+      213: -7592042592880835035
+    second: Bullet_2_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -108,64 +105,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Basic Bullet_0
+      name: Bullet_2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 120
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7919d6e4474bb32a0800000000000000
+      internalID: -6756608404314287721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bullet_2_1
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 180
-        height: 180
+        width: 120
+        height: 120
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76957459a0c156790800000000000000
-      internalID: -7537587569554925209
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Basic Bullet_1
-      rect:
-        serializedVersion: 2
-        x: 181
-        y: 0
-        width: 180
-        height: 180
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: db6749cc8a291b8d0800000000000000
-      internalID: -2832321436954888515
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Basic Bullet_2
-      rect:
-        serializedVersion: 2
-        x: 360
-        y: 0
-        width: 180
-        height: 180
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4e37d4ef958460a20800000000000000
-      internalID: 3028187350809015268
+      spriteID: 526c3b37c75a3a690800000000000000
+      internalID: -7592042592880835035
       vertices: []
       indices: 
       edges: []

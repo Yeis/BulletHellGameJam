@@ -1,16 +1,19 @@
 fileFormatVersion: 2
-guid: 0c53ac61b25ac7b48936f3bbbdfcff13
+guid: 4322e541a5d2e20429e86e6298c4d729
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7537587569554925209
-    second: Basic Bullet_0
+      213: -6454969007074664543
+    second: Shuriken_0
   - first:
-      213: -2832321436954888515
-    second: Basic Bullet_1
+      213: -1711769274298023544
+    second: Shuriken_1
   - first:
-      213: 3028187350809015268
-    second: Basic Bullet_2
+      213: -4147570122916513537
+    second: Shuriken_2
+  - first:
+      213: -2755136619034746637
+    second: Shuriken_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -108,64 +111,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Basic Bullet_0
+      name: Shuriken_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 165
+        width: 165
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1af982153e75b66a0800000000000000
+      internalID: -6454969007074664543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shuriken_1
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 165
+        width: 165
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 881c9041ae29e38e0800000000000000
+      internalID: -1711769274298023544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shuriken_2
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 180
-        height: 180
+        width: 165
+        height: 165
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76957459a0c156790800000000000000
-      internalID: -7537587569554925209
+      spriteID: ff8b98ea2fed076c0800000000000000
+      internalID: -4147570122916513537
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic Bullet_1
+      name: Shuriken_3
       rect:
         serializedVersion: 2
-        x: 181
+        x: 165
         y: 0
-        width: 180
-        height: 180
+        width: 165
+        height: 165
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db6749cc8a291b8d0800000000000000
-      internalID: -2832321436954888515
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Basic Bullet_2
-      rect:
-        serializedVersion: 2
-        x: 360
-        y: 0
-        width: 180
-        height: 180
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4e37d4ef958460a20800000000000000
-      internalID: 3028187350809015268
+      spriteID: 3f063c2a7d9c3c9d0800000000000000
+      internalID: -2755136619034746637
       vertices: []
       indices: 
       edges: []
