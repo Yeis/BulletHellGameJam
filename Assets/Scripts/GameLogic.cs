@@ -55,7 +55,7 @@ public class GameLogic : MonoBehaviour
                 Spawner spawnerScript = spawner.GetComponent<Spawner>();
                 spawnerScript.projectile = sinusoidalProjectile;
                 spawnerScript.delayBetweenProjectiles = 0.5f;
-                spawnerScript.totalProjectiles = 6;
+                spawnerScript.totalProjectiles = 20;
                 switch(projectileDirection) {
                     case "Left":
                         spawnerScript.projectileDirection = Vector3.left;

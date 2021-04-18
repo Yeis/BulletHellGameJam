@@ -360,7 +360,7 @@ MonoBehaviour:
     type: 3}
   greenProjectile: {fileID: 4541764561575224166, guid: df37f66b56c6f0a4894329088c2cae1d,
     type: 3}
-  spawningTime: 1
+  spawningTime: 0.5
   difficulty: 1
 --- !u!4 &1915632916
 Transform:
