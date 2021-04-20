@@ -16,7 +16,7 @@ public class BackgroundScrolling : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        spriteRenderer.material.mainTextureOffset = new Vector2(Time.time * speed, 0);
+        spriteRenderer.material.mainTextureOffset = new Vector2(0, Time.time * speed);
         // spriteRenderer.sharedMaterial.SetTextureOffset("_MainTex", offset); 
     }
 }
