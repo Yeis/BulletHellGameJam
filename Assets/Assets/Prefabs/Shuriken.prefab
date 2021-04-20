@@ -155,5 +155,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: {x: 1, y: 0}
-  moveSpeed: 5
-  rotation: 180
+  moveSpeed: 3
+  rotation: 360

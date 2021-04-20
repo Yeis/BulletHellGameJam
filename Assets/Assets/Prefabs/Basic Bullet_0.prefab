@@ -99,10 +99,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  frequency: 2
-  magnitude: 2
+  frequency: 1
+  magnitude: 1
   direction: {x: -1, y: 0, z: 0}
-  offset: 40
+  offset: 351
 --- !u!95 &2073439138690901425
 Animator:
   serializedVersion: 3

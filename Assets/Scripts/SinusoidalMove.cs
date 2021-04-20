@@ -5,7 +5,7 @@ using UnityEngine;
 public class SinusoidalMove : MonoBehaviour
 {
     [SerializeField]
-    float moveSpeed = 1f;
+    public float moveSpeed = 1f;
 
     [SerializeField]
     float frequency = 3f;

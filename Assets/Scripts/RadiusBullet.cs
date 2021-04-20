@@ -39,6 +39,5 @@ public class RadiusBullet : MonoBehaviour
     void Move() {
         // rigidbody2D.AddForce(velocity * moveSpeed * Time.deltaTime);
         transform.Translate(velocity * moveSpeed * Time.deltaTime);
-
     }
 }

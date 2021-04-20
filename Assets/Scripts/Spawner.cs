@@ -16,6 +16,7 @@ public class Spawner : MonoBehaviour
     public float delayBetweenProjectiles = 1f;
 
     public Vector3 projectileDirection = Vector3.right;
+    public float bulletSpeed = 1.0f;
     private float timeSinceLastSpawned = 0.0f;
     private int projectilesSpawned = 0;
 
@@ -40,14 +41,15 @@ public class Spawner : MonoBehaviour
             {
                 projectile.GetComponent<SinusoidalMove>().offset += 1;
                 projectile.GetComponent<SinusoidalMove>().direction = projectileDirection;
+                projectile.GetComponent<SinusoidalMove>().moveSpeed = bulletSpeed;
+
                 GameObject newProjectile = Instantiate(projectile, gameObject.transform.position, Quaternion.identity);
-                gameLogicReference.projectiles.Add(newProjectile);
             }
             else if (projectile.tag == "LineBeam")
             {
                 projectile.GetComponent<LineBeam>().direction = projectileDirection;
+                projectile.GetComponent<LineBeam>().moveSpeed = bulletSpeed;
                 GameObject newProjectile = Instantiate(projectile, gameObject.transform.position, Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, projectileDirection)));
-                gameLogicReference.projectiles.Add(newProjectile);
             }
         }
         else if (totalProjectiles == 0)

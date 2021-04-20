@@ -5,6 +5,7 @@ using UnityEngine;
 public class RadiusSpawner : MonoBehaviour
 {
     public GameObject projectile;
+    public float bulletSpeed = 3.0f;
     public float minRotation, maxRotation;
     public int totalProjectiles = 10;
     public float delayBetweenProjectiles = 1f;
@@ -78,7 +79,8 @@ public class RadiusSpawner : MonoBehaviour
         for (int i = 0; i < totalProjectiles; i++)
         {
             projectile.GetComponent<RadiusBullet>().rotation = rotations[i];
-            spawnedBullets[i] = Instantiate(projectile, transform);
+            projectile.GetComponent<RadiusBullet>().moveSpeed = bulletSpeed;
+            spawnedBullets[i] = Instantiate(projectile, transform.position, Quaternion.identity);
 
         }
         return spawnedBullets;
