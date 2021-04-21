@@ -816,6 +816,7 @@ MonoBehaviour:
   timeLeftToLose: 10
   powerUpTime: 5
   heartTime: 5
+  maxCharge: 2
   playerPosition: {x: 0, y: 0, z: 0}
   difficulty: 1
 --- !u!4 &1915632916

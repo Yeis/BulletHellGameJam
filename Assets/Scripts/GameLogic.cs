@@ -22,9 +22,9 @@ public class GameLogic : MonoBehaviour
     public Text timeFuelLeftLabel;
 
     public float spawningTime = 0.1f , stillnessTimePenalty = 3.0f, stillnessRadio = 1f, difficultyIncrease = 10f;
-    public float timeLeftToLose = 10.0f, powerUpTime, heartTime = 5.0f;
+    public float timeLeftToLose = 10.0f, powerUpTime, heartTime = 5.0f, maxCharge = 2.0f;
     public Vector3 playerPosition;
-    private bool isPaused = false , isStopped = false, isStill = false;
+    private bool isPaused = false , canPause = false, isStill = false;
     private Vector3 mainCameraLimits;
     int cameraLimitXRound, cameraLimitYRound;
 
@@ -36,7 +36,7 @@ public class GameLogic : MonoBehaviour
 
     private string[] projectileDirections = new string[4] {"Left","Right", "Down", "Up"};
     private float timeSinceLastSpawned = 0f, timeSinceLastMoved = 0f, timeSinceLastDifficultyIncrease = 0f;
-    private float timeSinceLastHeart = 0f, timeSinceLastPowerUp = 0f;
+    private float timeSinceLastHeart = 0f, timeSinceLastPowerUp = 0f, currentCharge = 0f;
     void Start()
     {
         random = new System.Random();
@@ -46,7 +46,7 @@ public class GameLogic : MonoBehaviour
         cameraLimitYRound = Mathf.RoundToInt(mainCameraLimits.y);
         playerPosition = player.transform.position;
         timeSinceLastSpawned = spawningTime;
-        powerUpTime = UnityEngine.Random.Range(5f, 10f + (difficulty / 2));
+        powerUpTime = UnityEngine.Random.Range(10f, 20f + (difficulty / 2));
     }
 
     void OnDrawGizmos()
@@ -63,7 +63,7 @@ public class GameLogic : MonoBehaviour
         timeSinceLastPowerUp += Time.deltaTime;
         timeSinceLastHeart += Time.deltaTime;
         timeLeftToLose -= Time.deltaTime;
-
+    
         //Fuel Logic
         if(timeLeftToLose <= 0.0f) {
             player.GetComponent<SpaceshipController>().DestroySpaceship();
@@ -80,6 +80,17 @@ public class GameLogic : MonoBehaviour
             timeSinceLastPowerUp = 0.0f;
             powerUpTime = UnityEngine.Random.Range(5f, 10f + (difficulty / 2));
             SpawnPowerUp(bomb);
+        }
+
+        //TimeFuel Logic
+        if(!isPaused) {
+            currentCharge = Math.Min(currentCharge + Time.deltaTime / 10, maxCharge);
+        } else {
+            currentCharge -= Time.deltaTime;
+        }
+        if(currentCharge <= 0) {
+            isPaused = false;
+            Time.timeScale = 1;
         }
 
         //Difficulty logic
@@ -112,25 +123,16 @@ public class GameLogic : MonoBehaviour
         }
 
         //Input values
-        if (Input.GetKeyDown(KeyCode.S) && !isStopped)
-        {
-            //Stop
-            Time.timeScale = 0f;
-            isStopped = true;
-            isPaused = false;
-        }
-        else if (Input.GetKeyDown(KeyCode.D) && !isPaused)
+        if (Input.GetKeyDown(KeyCode.Space) && !isPaused && currentCharge >= 0.5f)
         {
             //Pause
             Time.timeScale = 0.5f;
-            isStopped = false;
             isPaused = true;
         }
-        else if (Input.GetKeyDown(KeyCode.A) && (isPaused || isStopped))
+        else if (Input.GetKeyDown(KeyCode.Space) && isPaused)
         {
             //Resume
             Time.timeScale = 1;
-            isStopped = false;
             isPaused = false;
         }
 
@@ -141,7 +143,8 @@ public class GameLogic : MonoBehaviour
 
     private void UpdateUI() {
         difficultyLabel.text = "Difficulty: " + difficulty;
-        timeFuelLeftLabel.text = "Time Fuel Left: " + timeLeftToLose;
+        timeFuelLeftLabel.text = "Time Fuel Left: " + currentCharge;
+        timeLeftLabel.text = "Time Left: " + timeLeftToLose;
     }
 
     private bool IsPlayerStill() {
