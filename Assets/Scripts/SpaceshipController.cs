@@ -37,6 +37,8 @@ public class SpaceshipController : MonoBehaviour
             mousePosition.z = actualDistance;
             transform.position = Camera.main.ScreenToWorldPoint(mousePosition);
         }
+        //player rotation is driven by the Horizontal 
+        animator.SetFloat("MouseX", Input.GetAxis("Mouse X") * 2);
     }
 
     void OnTriggerEnter2D(Collider2D col)

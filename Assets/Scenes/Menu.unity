@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1132,35 +1132,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1032665556, guid: 28cb32c7c84ea6245be67126253a123f, type: 3}
-      propertyPath: m_PointLightInnerAngle
-      value: 360
-      objectReference: {fileID: 0}
-    - target: {fileID: 1032665556, guid: 28cb32c7c84ea6245be67126253a123f, type: 3}
-      propertyPath: m_FalloffIntensity
-      value: 0.814
-      objectReference: {fileID: 0}
-    - target: {fileID: 1032665556, guid: 28cb32c7c84ea6245be67126253a123f, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1032665556, guid: 28cb32c7c84ea6245be67126253a123f, type: 3}
-      propertyPath: m_Color.g
-      value: 0.4292453
-      objectReference: {fileID: 0}
-    - target: {fileID: 1032665556, guid: 28cb32c7c84ea6245be67126253a123f, type: 3}
-      propertyPath: m_Color.b
-      value: 0.4292453
-      objectReference: {fileID: 0}
-    - target: {fileID: 1836763680, guid: 28cb32c7c84ea6245be67126253a123f, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5323878625948090418, guid: 28cb32c7c84ea6245be67126253a123f,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: bf1248c0dacb82e4fa85589a60046d50, type: 2}
     - target: {fileID: 5323878625948090419, guid: 28cb32c7c84ea6245be67126253a123f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1252,10 +1223,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07687f1db0dc4e547b970727c50bd6c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectiles: []
+  player: {fileID: 0}
   spawner: {fileID: 4588126005907372045, guid: 58867690475c48442b738d17d1ea7e3f, type: 3}
   radiusSpawner: {fileID: 1942093577277841305, guid: 9beda41e2910fdd4faaa62ceec64ffbe,
     type: 3}
+  bomb: {fileID: 0}
   lineBeamProjectile: {fileID: 4613968047351465823, guid: 3983ff6793824e74c90adcc5ff229577,
     type: 3}
   sinusoidalProjectile: {fileID: 7449278430301526035, guid: b7a06eb52733b7c4da78d7388168c002,
@@ -1265,6 +1237,10 @@ MonoBehaviour:
   greenProjectile: {fileID: 4541764561575224166, guid: df37f66b56c6f0a4894329088c2cae1d,
     type: 3}
   spawningTime: 0.5
+  stillnessTimePenalty: 3
+  stillnessRadio: 1
+  difficultyIncrease: 10
+  playerPosition: {x: 0, y: 0, z: 0}
   difficulty: 1
 --- !u!4 &1893033815
 Transform:
