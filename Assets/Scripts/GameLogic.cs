@@ -8,6 +8,7 @@ public class GameLogic : MonoBehaviour
     public GameObject player;
     public GameObject spawner;
     public GameObject radiusSpawner;
+    public GameObject bomb;
 
     public GameObject lineBeamProjectile;
     public GameObject sinusoidalProjectile;
@@ -23,7 +24,8 @@ public class GameLogic : MonoBehaviour
     public int difficulty = 1;
     private System.Random random;
     // Start is called before the first frame update
-    private string[] projectileTypes = new string[4] {"Sinusoidal","LineBeam", "FireWork", "Flamethrower"};
+    private string[] projectileTypes = new string[5] {"Sinusoidal","LineBeam", "FireWork", "Flamethrower", "Bomb"};
+    // private string[] projectileTypes = new string[2] { "Flamethrower", "Bomb" };
 
     private string[] projectileDirections = new string[4] {"Left","Right", "Down", "Up"};
     private float timeSinceLastSpawned = 0f, timeSinceLastMoved = 0f, timeSinceLastDifficultyIncrease = 0f;
@@ -109,6 +111,7 @@ public class GameLogic : MonoBehaviour
     
     private void SpawnSpawner() {
         string projectileType = projectileTypes[random.Next(projectileTypes.Length)];
+        // projectileType = "Bomb";
         if (projectileType == "Sinusoidal")
         {
             string projectileDirection = projectileDirections[random.Next(projectileDirections.Length)];
@@ -173,6 +176,35 @@ public class GameLogic : MonoBehaviour
                     break;
             }
         }
+        else if(projectileType == "Bomb") 
+        {
+            string projectileDirection = projectileDirections[random.Next(projectileDirections.Length)];
+            Spawner spawnerScript = spawner.GetComponent<Spawner>();
+            spawnerScript.projectile = bomb;
+            spawnerScript.totalProjectiles = 1;
+            spawnerScript.delayBetweenProjectiles = 2.0f;
+            spawnerScript.bulletSpeed = 1.0f;
+
+            switch (projectileDirection)
+            {
+                case "Left":
+                    spawnerScript.projectileDirection = Vector3.left;
+                    Instantiate(spawner, new Vector3(cameraLimitXRound, random.Next(-cameraLimitYRound, cameraLimitYRound), 0), Quaternion.identity);
+                    break;
+                case "Right":
+                    spawnerScript.projectileDirection = Vector3.right;
+                    Instantiate(spawner, new Vector3(-cameraLimitXRound, random.Next(-cameraLimitYRound, cameraLimitYRound), 0), Quaternion.identity);
+                    break;
+                case "Up":
+                    spawnerScript.projectileDirection = Vector3.up;
+                    Instantiate(spawner, new Vector3(random.Next(-cameraLimitXRound, cameraLimitXRound), -cameraLimitYRound, 0), Quaternion.identity);
+                    break;
+                case "Down":
+                    spawnerScript.projectileDirection = Vector3.down;
+                    Instantiate(spawner, new Vector3(random.Next(-cameraLimitXRound, cameraLimitXRound), cameraLimitYRound, 0), Quaternion.identity);
+                    break;
+            }
+        }
         else if (projectileType == "FireWork")
         {
             RadiusSpawner spawnerScript = radiusSpawner.GetComponent<RadiusSpawner>();
@@ -183,6 +215,8 @@ public class GameLogic : MonoBehaviour
             spawnerScript.totalProjectiles = random.Next(6, 6 + (difficulty / 2)); 
             spawnerScript.totalProjectileWaves = random.Next(3, 3 + (difficulty / 2));
             spawnerScript.isRandom = random.Next(1, difficulty) > 1;
+            spawnerScript.isBombBullet = false;
+
 
             if(isStill) {
                 Instantiate(radiusSpawner, new Vector3(random.Next((int)(playerPosition.x - stillnessRadio), (int)(playerPosition.x + stillnessRadio)),
@@ -200,6 +234,8 @@ public class GameLogic : MonoBehaviour
             spawnerScript.totalProjectileWaves = random.Next(6, 6 + (difficulty / 2));
             spawnerScript.bulletSpeed = UnityEngine.Random.Range(3f, 3f + (difficulty / 2));
             spawnerScript.isRandom = random.Next(1, difficulty) > 30;
+            spawnerScript.isBombBullet = false;
+
             switch (projectileDirection)
             {
                 case "Left":

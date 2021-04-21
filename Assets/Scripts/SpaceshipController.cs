@@ -41,8 +41,14 @@ public class SpaceshipController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        isKill = true;
-        animator.SetTrigger("Destroy");
+        if(col.tag == "Bomb") {
+            col.gameObject.GetComponent<Bomb>().Explode();
+            Destroy(col.gameObject);
+        }else if(col.tag != "BombBullet") {
+            isKill = true;
+            animator.SetTrigger("Destroy");
+        }
+
     }
 
     public void Goodbye()

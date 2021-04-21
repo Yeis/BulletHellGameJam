@@ -11,6 +11,7 @@ public class RadiusSpawner : MonoBehaviour
     public float delayBetweenProjectiles = 1f;
     public int totalProjectileWaves = 4;
     public bool isRandom;
+    public bool isBombBullet;
     float[] rotations;
     private float timeSinceLastSpawned = 0.0f;
 
@@ -80,6 +81,7 @@ public class RadiusSpawner : MonoBehaviour
         {
             projectile.GetComponent<RadiusBullet>().rotation = rotations[i];
             projectile.GetComponent<RadiusBullet>().moveSpeed = bulletSpeed;
+            projectile.GetComponent<RadiusBullet>().isBombBullet = isBombBullet;
             spawnedBullets[i] = Instantiate(projectile, transform.position, Quaternion.identity);
 
         }

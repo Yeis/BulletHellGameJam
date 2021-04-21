@@ -7,6 +7,7 @@ public class RadiusBullet : MonoBehaviour
     public Vector2 velocity;
     public float moveSpeed;
     public float rotation;
+    public bool isBombBullet = false;
 
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rigidbody2D;
@@ -39,5 +40,15 @@ public class RadiusBullet : MonoBehaviour
     void Move() {
         // rigidbody2D.AddForce(velocity * moveSpeed * Time.deltaTime);
         transform.Translate(velocity * moveSpeed * Time.deltaTime);
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.tag == "Projectile" || col.tag == "LineBeam" || col.tag == "SinusoidalBullet")
+        {
+            print("Bomb Destroying");
+            Destroy(col.gameObject);
+        }
+
     }
 }

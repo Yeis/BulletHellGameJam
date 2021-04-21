@@ -7,6 +7,8 @@ TagManager:
   - LineBeam
   - SinusoidalBullet
   - Projectile
+  - Bomb
+  - BombBullet
   layers:
   - Default
   - TransparentFX

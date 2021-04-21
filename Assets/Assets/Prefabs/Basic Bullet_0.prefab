@@ -98,11 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f642001d4911d4a996b55f8ebda262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 1.1263678
   frequency: 1
   magnitude: 1
   direction: {x: -1, y: 0, z: 0}
-  offset: 351
+  offset: 419
 --- !u!95 &2073439138690901425
 Animator:
   serializedVersion: 3

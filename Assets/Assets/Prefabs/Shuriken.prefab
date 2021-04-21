@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8286875668599621219}
   m_Layer: 0
   m_Name: Shuriken
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,5 +155,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: {x: 1, y: 0}
-  moveSpeed: 3
+  moveSpeed: 3.0000002
   rotation: 360
+  isBombBullet: 0
