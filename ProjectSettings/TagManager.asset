@@ -9,6 +9,7 @@ TagManager:
   - Projectile
   - Bomb
   - BombBullet
+  - Heart
   layers:
   - Default
   - TransparentFX

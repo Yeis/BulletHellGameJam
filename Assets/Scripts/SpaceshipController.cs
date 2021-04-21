@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class SpaceshipController : MonoBehaviour
 {
-    public float distance = 1.0f;
+    public float distance = 1.0f, recoveryFromHeart = 10.0f;
     public bool useInitalCameraDistance = false;
+    public GameLogic gameLogicReference;
     Animator animator;
-    bool isKill = false;
+    public bool isKill = false;
     private float actualDistance;
 
     // Start is called before the first frame update
@@ -46,11 +47,20 @@ public class SpaceshipController : MonoBehaviour
         if(col.tag == "Bomb") {
             col.gameObject.GetComponent<Bomb>().Explode();
             Destroy(col.gameObject);
-        }else if(col.tag != "BombBullet") {
-            isKill = true;
-            animator.SetTrigger("Destroy");
+        }
+        else if(col.tag == "Heart") {
+            gameLogicReference.timeLeftToLose += recoveryFromHeart;
+            Destroy(col.gameObject);
+        }
+        else if(col.tag != "BombBullet") {
+            DestroySpaceship();
         }
 
+    }
+
+    public void DestroySpaceship() {
+        isKill = true;
+        animator.SetTrigger("Destroy");
     }
 
     public void Goodbye()

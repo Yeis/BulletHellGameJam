@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameLogic : MonoBehaviour
 {
@@ -9,13 +10,19 @@ public class GameLogic : MonoBehaviour
     public GameObject spawner;
     public GameObject radiusSpawner;
     public GameObject bomb;
+    public GameObject heart;
 
     public GameObject lineBeamProjectile;
     public GameObject sinusoidalProjectile;
     public GameObject shurikenProjectile;
     public GameObject greenProjectile;
 
+    public Text difficultyLabel;
+    public Text timeLeftLabel;
+    public Text timeFuelLeftLabel;
+
     public float spawningTime = 0.1f , stillnessTimePenalty = 3.0f, stillnessRadio = 1f, difficultyIncrease = 10f;
+    public float timeLeftToLose = 10.0f, powerUpTime, heartTime = 5.0f;
     public Vector3 playerPosition;
     private bool isPaused = false , isStopped = false, isStill = false;
     private Vector3 mainCameraLimits;
@@ -29,7 +36,7 @@ public class GameLogic : MonoBehaviour
 
     private string[] projectileDirections = new string[4] {"Left","Right", "Down", "Up"};
     private float timeSinceLastSpawned = 0f, timeSinceLastMoved = 0f, timeSinceLastDifficultyIncrease = 0f;
-
+    private float timeSinceLastHeart = 0f, timeSinceLastPowerUp = 0f;
     void Start()
     {
         random = new System.Random();
@@ -39,6 +46,7 @@ public class GameLogic : MonoBehaviour
         cameraLimitYRound = Mathf.RoundToInt(mainCameraLimits.y);
         playerPosition = player.transform.position;
         timeSinceLastSpawned = spawningTime;
+        powerUpTime = UnityEngine.Random.Range(5f, 10f + (difficulty / 2));
     }
 
     void OnDrawGizmos()
@@ -49,9 +57,31 @@ public class GameLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print("Dificulty: " + difficulty);
+        //Update Timers
         timeSinceLastSpawned += Time.deltaTime;
         timeSinceLastDifficultyIncrease += Time.deltaTime;
+        timeSinceLastPowerUp += Time.deltaTime;
+        timeSinceLastHeart += Time.deltaTime;
+        timeLeftToLose -= Time.deltaTime;
+
+        //Fuel Logic
+        if(timeLeftToLose <= 0.0f) {
+            player.GetComponent<SpaceshipController>().DestroySpaceship();
+        }
+
+        //Spawning Fuel logic
+        if(timeSinceLastHeart >= heartTime) {
+            timeSinceLastHeart = 0.0f;
+            SpawnPowerUp(heart);
+        }
+
+        //PowerUp Logic
+        if(timeSinceLastPowerUp >= powerUpTime) {
+            timeSinceLastPowerUp = 0.0f;
+            powerUpTime = UnityEngine.Random.Range(5f, 10f + (difficulty / 2));
+            SpawnPowerUp(bomb);
+        }
+
         //Difficulty logic
         if(timeSinceLastDifficultyIncrease >= difficultyIncrease) {
             timeSinceLastDifficultyIncrease = 0.0f;
@@ -61,7 +91,7 @@ public class GameLogic : MonoBehaviour
         }
 
         //Stillness logic
-        if (IsPlayerStill())
+        if (player != null && IsPlayerStill())
         {
             timeSinceLastMoved += Time.deltaTime;
             if(timeSinceLastMoved >= stillnessTimePenalty) {
@@ -103,11 +133,49 @@ public class GameLogic : MonoBehaviour
             isStopped = false;
             isPaused = false;
         }
+
+        //UI
+        UpdateUI();
+        
+    }
+
+    private void UpdateUI() {
+        difficultyLabel.text = "Difficulty: " + difficulty;
+        timeFuelLeftLabel.text = "Time Fuel Left: " + timeLeftToLose;
     }
 
     private bool IsPlayerStill() {
         return Vector2.Distance(player.transform.position, playerPosition) < stillnessRadio;
     }
+
+    private void SpawnPowerUp(GameObject powerUp) {
+        string projectileDirection = projectileDirections[random.Next(projectileDirections.Length)];
+        Spawner spawnerScript = spawner.GetComponent<Spawner>();
+        spawnerScript.projectile = powerUp;
+        spawnerScript.totalProjectiles = 1;
+        spawnerScript.delayBetweenProjectiles = 2.0f;
+        spawnerScript.bulletSpeed = 2.0f;
+        switch (projectileDirection)
+        {
+            case "Left":
+                spawnerScript.projectileDirection = Vector3.left;
+                Instantiate(spawner, new Vector3(cameraLimitXRound, random.Next(-cameraLimitYRound, cameraLimitYRound), 0), Quaternion.identity);
+                break;
+            case "Right":
+                spawnerScript.projectileDirection = Vector3.right;
+                Instantiate(spawner, new Vector3(-cameraLimitXRound, random.Next(-cameraLimitYRound, cameraLimitYRound), 0), Quaternion.identity);
+                break;
+            case "Up":
+                spawnerScript.projectileDirection = Vector3.up;
+                Instantiate(spawner, new Vector3(random.Next(-cameraLimitXRound, cameraLimitXRound), -cameraLimitYRound, 0), Quaternion.identity);
+                break;
+            case "Down":
+                spawnerScript.projectileDirection = Vector3.down;
+                Instantiate(spawner, new Vector3(random.Next(-cameraLimitXRound, cameraLimitXRound), cameraLimitYRound, 0), Quaternion.identity);
+                break;
+        }
+    }
+
     
     private void SpawnSpawner() {
         string projectileType = projectileTypes[random.Next(projectileTypes.Length)];
@@ -173,35 +241,6 @@ public class GameLogic : MonoBehaviour
                     spawnerScript.projectileDirection = Vector3.down;
                     if (isStill) Instantiate(spawner, new Vector3(random.Next((int)(playerPosition.x - stillnessRadio), (int)(playerPosition.x - stillnessRadio)), cameraLimitYRound, 0), Quaternion.identity);
                     else Instantiate(spawner, new Vector3(random.Next(-cameraLimitXRound, cameraLimitXRound), cameraLimitYRound, 0), Quaternion.identity);
-                    break;
-            }
-        }
-        else if(projectileType == "Bomb") 
-        {
-            string projectileDirection = projectileDirections[random.Next(projectileDirections.Length)];
-            Spawner spawnerScript = spawner.GetComponent<Spawner>();
-            spawnerScript.projectile = bomb;
-            spawnerScript.totalProjectiles = 1;
-            spawnerScript.delayBetweenProjectiles = 2.0f;
-            spawnerScript.bulletSpeed = 1.0f;
-
-            switch (projectileDirection)
-            {
-                case "Left":
-                    spawnerScript.projectileDirection = Vector3.left;
-                    Instantiate(spawner, new Vector3(cameraLimitXRound, random.Next(-cameraLimitYRound, cameraLimitYRound), 0), Quaternion.identity);
-                    break;
-                case "Right":
-                    spawnerScript.projectileDirection = Vector3.right;
-                    Instantiate(spawner, new Vector3(-cameraLimitXRound, random.Next(-cameraLimitYRound, cameraLimitYRound), 0), Quaternion.identity);
-                    break;
-                case "Up":
-                    spawnerScript.projectileDirection = Vector3.up;
-                    Instantiate(spawner, new Vector3(random.Next(-cameraLimitXRound, cameraLimitXRound), -cameraLimitYRound, 0), Quaternion.identity);
-                    break;
-                case "Down":
-                    spawnerScript.projectileDirection = Vector3.down;
-                    Instantiate(spawner, new Vector3(random.Next(-cameraLimitXRound, cameraLimitXRound), cameraLimitYRound, 0), Quaternion.identity);
                     break;
             }
         }

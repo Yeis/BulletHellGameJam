@@ -50,7 +50,7 @@ public class Spawner : MonoBehaviour
                 projectile.GetComponent<LineBeam>().direction = projectileDirection;
                 projectile.GetComponent<LineBeam>().moveSpeed = bulletSpeed;
                 GameObject newProjectile = Instantiate(projectile, gameObject.transform.position, Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, projectileDirection)));
-            } else if (projectile.tag == "Bomb") {
+            } else if (projectile.tag == "Bomb" || projectile.tag == "Heart") {
                 projectile.GetComponent<LineBeam>().direction = projectileDirection;
                 projectile.GetComponent<LineBeam>().moveSpeed = bulletSpeed;
                 GameObject newProjectile = Instantiate(projectile, gameObject.transform.position, Quaternion.identity);
