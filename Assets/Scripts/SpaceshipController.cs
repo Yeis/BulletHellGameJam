@@ -9,12 +9,15 @@ public class SpaceshipController : MonoBehaviour
     Animator animator;
     bool isKill = false;
     private float actualDistance;
+    private Vector3 lastMousePosition;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         Cursor.visible = false;
+        lastMousePosition = Input.mousePosition;
+
         if (useInitalCameraDistance)
         {
             Vector3 toObjectVector = transform.position - Camera.main.transform.position;
@@ -39,6 +42,30 @@ public class SpaceshipController : MonoBehaviour
         }
         //player rotation is driven by the Horizontal 
         animator.SetFloat("MouseX", Input.GetAxis("Mouse X") * 2);
+    }
+
+    void FixedUpdate()
+    {
+
+        if (Input.GetAxis("Mouse X") == 0 || Input.GetAxis("Mouse Y") == 0)
+        {
+            lastMousePosition = Input.mousePosition;
+        }
+
+        Vector3 mouseDelta = Input.mousePosition - lastMousePosition;
+
+        if (mouseDelta.sqrMagnitude < 0.1f)
+        {
+            return; // don't do tiny rotations.
+        }
+
+        float angle = Mathf.Atan2(mouseDelta.y, mouseDelta.x) * Mathf.Rad2Deg;
+        if (angle < 0) angle += 360;
+        angle -= 90;
+        Debug.Log(angle);
+        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x,
+                                                  transform.localEulerAngles.y,
+                                                  angle);
     }
 
     void OnTriggerEnter2D(Collider2D col)
