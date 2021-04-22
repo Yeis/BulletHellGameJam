@@ -1563,7 +1563,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1893033814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1596,7 +1596,7 @@ MonoBehaviour:
   fuelLeft: {fileID: 0}
   retryButton: {fileID: 0}
   audioController: {fileID: 0}
-  spawningTime: 0.5
+  spawningTime: 5
   stillnessTimePenalty: 3
   stillnessRadio: 1
   difficultyIncrease: 10
