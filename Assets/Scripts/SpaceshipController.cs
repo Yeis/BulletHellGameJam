@@ -44,36 +44,15 @@ public class SpaceshipController : MonoBehaviour
         animator.SetFloat("MouseX", Input.GetAxis("Mouse X") * 2);
     }
 
-    void FixedUpdate()
-    {
-
-        if (Input.GetAxis("Mouse X") == 0 || Input.GetAxis("Mouse Y") == 0)
-        {
-            lastMousePosition = Input.mousePosition;
-        }
-
-        Vector3 mouseDelta = Input.mousePosition - lastMousePosition;
-
-        if (mouseDelta.sqrMagnitude < 0.1f)
-        {
-            return; // don't do tiny rotations.
-        }
-
-        float angle = Mathf.Atan2(mouseDelta.y, mouseDelta.x) * Mathf.Rad2Deg;
-        if (angle < 0) angle += 360;
-        angle -= 90;
-        Debug.Log(angle);
-        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x,
-                                                  transform.localEulerAngles.y,
-                                                  angle);
-    }
-
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.tag == "Bomb") {
+        if (col.tag == "Bomb")
+        {
             col.gameObject.GetComponent<Bomb>().Explode();
             Destroy(col.gameObject);
-        }else if(col.tag != "BombBullet") {
+        }
+        else if (col.tag != "BombBullet")
+        {
             isKill = true;
             animator.SetTrigger("Destroy");
         }
