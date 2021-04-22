@@ -9,7 +9,7 @@ public class UIController : MonoBehaviour
     private float speed = 0;
     public float maxSpeed = 10;
     public float increment = 1;
-
+    public AudioController audioController;
     public float fadeoutSpeed = 0.5f;
     public GameObject spaceship;
     public GameObject blackoutSquare;
@@ -23,6 +23,7 @@ public class UIController : MonoBehaviour
 
     void TaskOnClick()
     {
+        audioController.PlayClip("bomb");
         StartCoroutine(MoveSpaceship());
         StartCoroutine(FadeToBlack());
     }
