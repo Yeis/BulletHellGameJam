@@ -585,7 +585,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 75.25}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 306.5, y: 102.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &877981205
@@ -1374,6 +1374,7 @@ MonoBehaviour:
   radiusSpawner: {fileID: 1942093577277841305, guid: 9beda41e2910fdd4faaa62ceec64ffbe,
     type: 3}
   bomb: {fileID: 0}
+  heart: {fileID: 0}
   lineBeamProjectile: {fileID: 4613968047351465823, guid: 3983ff6793824e74c90adcc5ff229577,
     type: 3}
   sinusoidalProjectile: {fileID: 7449278430301526035, guid: b7a06eb52733b7c4da78d7388168c002,
@@ -1382,10 +1383,19 @@ MonoBehaviour:
     type: 3}
   greenProjectile: {fileID: 4541764561575224166, guid: df37f66b56c6f0a4894329088c2cae1d,
     type: 3}
+  difficultyLabel: {fileID: 0}
+  timeLeftLabel: {fileID: 0}
+  timeFuelLeftLabel: {fileID: 0}
+  fuelLeft: {fileID: 0}
+  retryButton: {fileID: 0}
   spawningTime: 0.5
   stillnessTimePenalty: 3
   stillnessRadio: 1
   difficultyIncrease: 10
+  timeLeftToLose: 10
+  powerUpTime: 0
+  heartTime: 5
+  maxCharge: 2
   playerPosition: {x: 0, y: 0, z: 0}
   difficulty: 1
 --- !u!4 &1893033815
@@ -1434,10 +1444,10 @@ RectTransform:
   m_Father: {fileID: 1067617133}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 209.36}
-  m_SizeDelta: {x: -1299.5, y: -447.48}
+  m_AnchoredPosition: {x: 0, y: -250}
+  m_SizeDelta: {x: 0, y: 308.44284}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2108701633
 MonoBehaviour:
