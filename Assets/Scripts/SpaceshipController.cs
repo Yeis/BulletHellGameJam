@@ -8,20 +8,21 @@ public class SpaceshipController : MonoBehaviour
     public float distance = 1.0f;
     public bool useInitalCameraDistance = false;
     public GameLogic gameLogicReference;
+    public AudioController audioController;
     Animator animator;
     public bool isKill = false;
     private float actualDistance;
     private Vector3 lastMousePosition;
     public Text timeLeftLabel;
     public Text gameOverLabel;
-
-
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         gameOverLabel.enabled = false;
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         Cursor.visible = false;
         lastMousePosition = Input.mousePosition;
 
@@ -67,11 +68,13 @@ public class SpaceshipController : MonoBehaviour
         if (col.tag == "Bomb")
         {
             col.gameObject.GetComponent<Bomb>().Explode();
+            audioController.PlayClip("bomb");
             Destroy(col.gameObject);
         }
         else if (col.tag == "Heart")
         {
             gameLogicReference.timeLeftToLose = 10; // que no pase de 10! 
+            audioController.PlayClip("fuelUp");
             Destroy(col.gameObject);
         }
         else if (col.tag != "BombBullet")
@@ -84,6 +87,7 @@ public class SpaceshipController : MonoBehaviour
     public void DestroySpaceship()
     {
         isKill = true;
+        audioController.PlayClip("explode");
         animator.SetTrigger("Destroy");
     }
 

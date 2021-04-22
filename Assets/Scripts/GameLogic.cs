@@ -24,6 +24,8 @@ public class GameLogic : MonoBehaviour
     public Slider fuelLeft;
     public Button retryButton;
 
+    public AudioController audioController;
+
     public float spawningTime = 0.1f, stillnessTimePenalty = 3.0f, stillnessRadio = 1f, difficultyIncrease = 10f;
     public float timeLeftToLose = 10.0f, powerUpTime, heartTime = 5.0f, maxCharge = 2.0f;
     public Vector3 playerPosition;
@@ -106,6 +108,7 @@ public class GameLogic : MonoBehaviour
         if (currentCharge <= 0)
         {
             isPaused = false;
+            audioController.PlayClip("timeSlow");
             Time.timeScale = 1;
         }
 
@@ -147,12 +150,14 @@ public class GameLogic : MonoBehaviour
         {
             //Pause
             Time.timeScale = 0.5f;
+            audioController.PlayClip("timeSlow");
             isPaused = true;
         }
         else if (Input.GetKeyUp(KeyCode.Space) && isPaused)
         {
             //Resume
             Time.timeScale = 1;
+            audioController.PlayClip("timeBacktoNormal");
             isPaused = false;
         }
 
@@ -220,6 +225,7 @@ public class GameLogic : MonoBehaviour
             spawnerScript.delayBetweenProjectiles = 0.3f;
             spawnerScript.bulletSpeed = UnityEngine.Random.Range(1f, 1f + (difficulty / 2));
             spawnerScript.totalProjectiles = random.Next(6, 6 + (difficulty / 2));
+            spawnerScript.audioController = audioController;
             switch (projectileDirection)
             {
                 case "Left":
@@ -252,6 +258,7 @@ public class GameLogic : MonoBehaviour
             spawnerScript.delayBetweenProjectiles = 2.0f;
             spawnerScript.totalProjectiles = random.Next(3, 3 + (difficulty / 2));
             spawnerScript.bulletSpeed = UnityEngine.Random.Range(1f, 1f + (difficulty / 2));
+            spawnerScript.audioController = audioController;
             switch (projectileDirection)
             {
                 case "Left":
@@ -287,7 +294,7 @@ public class GameLogic : MonoBehaviour
             spawnerScript.totalProjectileWaves = random.Next(3, 3 + (difficulty / 2));
             spawnerScript.isRandom = random.Next(1, difficulty) > 1;
             spawnerScript.isBombBullet = false;
-
+            spawnerScript.audioController = audioController;
 
             if (isStill)
             {
@@ -309,6 +316,7 @@ public class GameLogic : MonoBehaviour
             spawnerScript.bulletSpeed = UnityEngine.Random.Range(3f, 3f + (difficulty / 2));
             spawnerScript.isRandom = random.Next(1, difficulty) > 30;
             spawnerScript.isBombBullet = false;
+            spawnerScript.audioController = audioController;
 
             switch (projectileDirection)
             {

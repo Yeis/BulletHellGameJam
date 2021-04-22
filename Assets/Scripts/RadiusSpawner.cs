@@ -12,6 +12,7 @@ public class RadiusSpawner : MonoBehaviour
     public int totalProjectileWaves = 4;
     public bool isRandom;
     public bool isBombBullet;
+    public AudioController audioController;
     float[] rotations;
     private float timeSinceLastSpawned = 0.0f;
 
@@ -33,6 +34,7 @@ public class RadiusSpawner : MonoBehaviour
         if(timeSinceLastSpawned >= delayBetweenProjectiles && totalProjectileWaves > 0) {
             timeSinceLastSpawned = 0.0f;
             totalProjectileWaves--;
+            audioController.PlayClip("projectile");
             SpawnBullets();
 
 

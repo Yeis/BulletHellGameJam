@@ -96,9 +96,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 884149912059181575, guid: 738a7991d83ff984abcd073be67e3bc2,
     type: 3}
+  bulletSpeed: 3
   minRotation: 1
   maxRotation: 360
   totalProjectiles: 10
   delayBetweenProjectiles: 1
   totalProjectileWaves: 4
   isRandom: 0
+  isBombBullet: 0
+  audioController: {fileID: 5788578867694587934, guid: 7208a75d39b32df42a85eec534cd2ec6,
+    type: 3}
