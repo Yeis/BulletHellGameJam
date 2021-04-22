@@ -10,12 +10,15 @@ public class SpaceshipController : MonoBehaviour
     Animator animator;
     public bool isKill = false;
     private float actualDistance;
+    private Vector3 lastMousePosition;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         Cursor.visible = false;
+        lastMousePosition = Input.mousePosition;
+
         if (useInitalCameraDistance)
         {
             Vector3 toObjectVector = transform.position - Camera.main.transform.position;
@@ -44,21 +47,25 @@ public class SpaceshipController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.tag == "Bomb") {
+        if (col.tag == "Bomb")
+        {
             col.gameObject.GetComponent<Bomb>().Explode();
             Destroy(col.gameObject);
         }
-        else if(col.tag == "Heart") {
+        else if (col.tag == "Heart")
+        {
             gameLogicReference.timeLeftToLose += recoveryFromHeart;
             Destroy(col.gameObject);
         }
-        else if(col.tag != "BombBullet") {
+        else if (col.tag != "BombBullet")
+        {
             DestroySpaceship();
         }
 
     }
 
-    public void DestroySpaceship() {
+    public void DestroySpaceship()
+    {
         isKill = true;
         animator.SetTrigger("Destroy");
     }
