@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpaceshipController : MonoBehaviour
 {
@@ -11,10 +12,15 @@ public class SpaceshipController : MonoBehaviour
     public bool isKill = false;
     private float actualDistance;
     private Vector3 lastMousePosition;
+    public Text timeLeftLabel;
+    public Text gameOverLabel;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
+        gameOverLabel.enabled = false;
         animator = GetComponent<Animator>();
         Cursor.visible = false;
         lastMousePosition = Input.mousePosition;
@@ -43,7 +49,18 @@ public class SpaceshipController : MonoBehaviour
         }
         //player rotation is driven by the Horizontal 
         animator.SetFloat("MouseX", Input.GetAxis("Mouse X") * 2);
+        UpdateUI();
     }
+
+    private void UpdateUI()
+    {
+        if (isKill)
+        {
+            timeLeftLabel.enabled = false;
+            gameOverLabel.enabled = true;
+        }
+    }
+
 
     void OnTriggerEnter2D(Collider2D col)
     {

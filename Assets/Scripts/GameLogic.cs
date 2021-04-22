@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameLogic : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class GameLogic : MonoBehaviour
     public Text difficultyLabel;
     public Text timeLeftLabel;
     public Text timeFuelLeftLabel;
+    public Slider fuelLeft;
+    public Button retryButton;
 
     public float spawningTime = 0.1f, stillnessTimePenalty = 3.0f, stillnessRadio = 1f, difficultyIncrease = 10f;
     public float timeLeftToLose = 10.0f, powerUpTime, heartTime = 5.0f, maxCharge = 2.0f;
@@ -39,6 +42,7 @@ public class GameLogic : MonoBehaviour
     private float timeSinceLastHeart = 0f, timeSinceLastPowerUp = 0f, currentCharge = 0f;
     void Start()
     {
+        retryButton.gameObject.SetActive(false);
         random = new System.Random();
         Camera mainCamera = Camera.main;
         mainCameraLimits = mainCamera.ScreenToWorldPoint(new Vector3(mainCamera.pixelWidth, mainCamera.pixelHeight, mainCamera.nearClipPlane));
@@ -47,6 +51,7 @@ public class GameLogic : MonoBehaviour
         playerPosition = player.transform.position;
         timeSinceLastSpawned = spawningTime;
         powerUpTime = UnityEngine.Random.Range(10f, 20f + (difficulty / 2));
+        retryButton.onClick.AddListener(TaskOnClick);
     }
 
     void OnDrawGizmos()
@@ -144,7 +149,7 @@ public class GameLogic : MonoBehaviour
             Time.timeScale = 0.5f;
             isPaused = true;
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && isPaused)
+        else if (Input.GetKeyUp(KeyCode.Space) && isPaused)
         {
             //Resume
             Time.timeScale = 1;
@@ -158,8 +163,14 @@ public class GameLogic : MonoBehaviour
     private void UpdateUI()
     {
         difficultyLabel.text = "Level " + difficulty;
-        timeFuelLeftLabel.text = "Time Fuel Left: " + currentCharge;
+        fuelLeft.value = currentCharge;
         timeLeftLabel.text = Math.Round(timeLeftToLose).ToString();
+
+        if (player.GetComponent<SpaceshipController>().isKill)
+        {
+            Cursor.visible = true;
+            retryButton.gameObject.SetActive(true);
+        }
     }
 
     private bool IsPlayerStill()
@@ -329,5 +340,10 @@ public class GameLogic : MonoBehaviour
         }
     }
 
+    void TaskOnClick()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+    }
 
 }
