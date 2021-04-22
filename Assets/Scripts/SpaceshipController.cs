@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpaceshipController : MonoBehaviour
 {
-    public float distance = 1.0f, recoveryFromHeart = 10.0f;
+    public float distance = 1.0f;
     public bool useInitalCameraDistance = false;
     public GameLogic gameLogicReference;
     Animator animator;
@@ -54,7 +54,7 @@ public class SpaceshipController : MonoBehaviour
         }
         else if (col.tag == "Heart")
         {
-            gameLogicReference.timeLeftToLose += recoveryFromHeart;
+            gameLogicReference.timeLeftToLose = 10; // que no pase de 10! 
             Destroy(col.gameObject);
         }
         else if (col.tag != "BombBullet")
