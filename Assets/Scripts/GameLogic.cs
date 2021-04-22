@@ -52,7 +52,7 @@ public class GameLogic : MonoBehaviour
         cameraLimitYRound = Mathf.RoundToInt(mainCameraLimits.y);
         playerPosition = player.transform.position;
         timeSinceLastSpawned = spawningTime;
-        powerUpTime = UnityEngine.Random.Range(10f, 20f + (difficulty / 2));
+        powerUpTime = UnityEngine.Random.Range(15f, 20f + (difficulty / 2));
         retryButton.onClick.AddListener(TaskOnClick);
     }
 
@@ -216,7 +216,7 @@ public class GameLogic : MonoBehaviour
     private void SpawnSpawner()
     {
         string projectileType = projectileTypes[random.Next(projectileTypes.Length)];
-        // projectileType = "Bomb";
+        // projectileType = "FireWork";
         if (projectileType == "Sinusoidal")
         {
             string projectileDirection = projectileDirections[random.Next(projectileDirections.Length)];
